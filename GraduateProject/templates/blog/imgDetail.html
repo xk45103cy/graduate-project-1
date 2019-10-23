@@ -24,12 +24,13 @@
       <li>
         <a href="/main">Home</a>
       </li>
+    {% if user.is_authenticated %}
       <li>
         <a href="/blog/{{ request.user.username }}">Blog</a>
       </li>
+    {% endif %}
       <li class="bars">
         {% if user.is_authenticated %}
-          <a href="">Hi, {{ request.user.username }}<!--<i class="fas fa-bars fa-lg"></i>--></a>
           <a href="/accounts/logout">Sign out<!--<i class="fas fa-bars fa-lg"></i>--></a>
         {% else %}
           <a href="/accounts/login">Sign in<!-- <i class="fas fa-bars fa-lg"></i> --></a>
@@ -62,23 +63,24 @@
 
     </div>
 
-    <div class="commend-list">
+    <div class="comment-list-frame">
         {% for item in currentImg.comments.all %}
-            <div>{{ item.author.username }}</div>
-            <p>{{ item.content }}</p>
-            <p>{{ item.createTime }}</p>
+            <div class="comment-list">
+                <div class="comment-user">{{ item.author.username }}</div>
+                <div class="comment-content"><p>{{ item.content }}</p></div>
+            </div>
         {% endfor %}
+        <div class="comment-submit-frame">
+          <form action="" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="author" value="{{ request.user.username }}">
+              <input type="hidden" name="img" value="{{ currentImg.id }}">
+              <textarea name="content" id="" cols="60" rows="2"></textarea>
+              <input type="submit" name="submit" value="submit">
+          </form>
+        </div>
     </div>
 
-    <div>
-      <form action="" method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="author" value="{{ request.user.username }}">
-          <input type="hidden" name="img" value="{{ currentImg.id }}">
-          <textarea name="content" id="" cols="30" rows="10"></textarea>
-          <input type="submit" name="submit" value="submit">
-      </form>
-    </div>
 
 
   </div>
