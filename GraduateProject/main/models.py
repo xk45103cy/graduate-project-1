@@ -24,10 +24,11 @@ class Img(models.Model):
     # 每張img要有自己的id
     id = models.CharField(primary_key=True, max_length=20, null=False)
     img_url = models.ImageField(null=True, upload_to='img', storage=ImageStorage())
-    cmpScore = models.IntegerField(null=True)
+    cmpScore = models.FloatField(null=True)
     like = models.IntegerField(null=True)
     createTime = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='imgs')
+    label = models.TextField(null=True)
 
     def __str__(self):
         return self.id
@@ -44,5 +45,3 @@ class Comment(models.Model):
         return self.id
 
 
-admin.site.register(Img)
-admin.site.register(Comment)

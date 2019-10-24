@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from main.models import Img, User, Comment
+from .score_mobilenet_input import assessPicture
+from .visionAPI import getLabel
 
 
 # Create your views here.
@@ -19,12 +21,16 @@ def main(request):
         loginUser = User.objects.get(username=loginUserName)
 
     if request.method == 'POST':
-        imgID = time.strftime('%Y%m%d%H%M%S') + str(random.randint(10, 99))
+        imgID = time.strftime('%Y_%m_%d_%H_%M_%S_') + str(random.randint(10, 99))
         # img = Img(img_url=request.FILES.get('img'),author=request.user.username,computerScoure=cmpScore,like=0)
         img = Img(id=imgID, img_url=request.FILES.get('img'), author=loginUser, cmpScore=randCmpScore, like=0)
         img.save()
         isUploadImg = True
+        img.cmpScore = assessPicture(str(img.img_url))
+        img.label = getLabel(str(img.img_url))
+        img.save()
 
+    
     imgListOrderByCmpScore = Img.objects.order_by("-cmpScore")
     imgListOrderByLike = Img.objects.order_by("-like")
     currentImg = img
@@ -32,7 +38,7 @@ def main(request):
         'imgListOrderByCmpScore': imgListOrderByCmpScore,
         'imgListOrderByLike': imgListOrderByLike,
         'currentImg': currentImg,
-        'isUploadImg': isUploadImg
+        'isUploadImg': isUploadImg,
     }
 
     return render(request, 'main/index.html', context)

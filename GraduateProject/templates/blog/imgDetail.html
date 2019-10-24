@@ -51,13 +51,11 @@
     <div class="image-detail-frame">
       <div class="image-detail">
         <div class="image-score">{{ currentImg.cmpScore }}</div>
-        <div class="image-creator">Creater By : <a class="creator-link" href="">arron pan</a></div>
+        <div class="image-creator">Creater By : <a class="creator-link" href="">{{currentImg.author}}</a></div>
         <div class="image-classification">
-          <div class="classification-item">sun</div>
-          <div class="classification-item">sunshine</div>
-          <div class="classification-item">house</div>
-          <div class="classification-item">tree</div>
-          <div class="classification-item">sky</div>
+        {% for label in currentImg.label %}
+        <div class="classification-item">{{label}}</div>
+        {% endfor %}
         </div>
       </div>
 

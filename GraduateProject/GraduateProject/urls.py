@@ -29,7 +29,7 @@ urlpatterns = [
     # blog url
     path('blog/<str:user>', blog),
     # imgDetail url
-    path('blog/<str:user>/<int:imgID>', imgDetail),
+    path('blog/<str:user>/<str:imgID>', imgDetail),
     # 新增commend url
     path('blog/addComment', addComment),
     # 登入url

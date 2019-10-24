@@ -17,7 +17,7 @@ class ImageStorage(FileSystemStorage):
         # 文件目录
         doc = os.path.dirname(name)
         # 定义文件名，年月日时分秒随机数
-        filename = time.strftime('%Y%m%d%H%M%S') + str(random.randint(10, 99))
+        filename = time.strftime('%Y_%m_%d_%H_%M_%S_') + str(random.randint(10, 99))
         # 重写合成文件名
         name = os.path.join(doc, filename + ext)
         # 调用父类方法
