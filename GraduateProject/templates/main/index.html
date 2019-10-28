@@ -57,6 +57,7 @@
     <h1>How Attractive You Are By Robot ?</h1>
     <p>Upload the image to see the score .</p>
     <div class="select-img-frame">
+      {%if user.is_authenticated%}
       <form id="upload-from" action="" method="post" enctype="multipart/form-data">
         <label class="select-img-btn">
           {% csrf_token %}
@@ -67,6 +68,9 @@
         </label>
         <!-- <input type="submit" name="submit" value="submit"> -->
       </form>
+      {% else %}
+      <a href="{% url 'login'%}?next={{request.path}}">UPLOAD NOW</a>
+      {% endif %}
     </div>
   </div>
   <!-- header-bar template -->
