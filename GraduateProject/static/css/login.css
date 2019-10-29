@@ -1,0 +1,39 @@
+/* login css */
+
+body {
+    background-color: black;
+    color: #fff;
+}
+
+.name{
+    text-align:center;
+}
+.login-frame {
+    position: absolute;
+	width: 300px;
+	height: 400px;
+	top: 50%;
+	left: 50%;
+	margin-top: -120px;
+	margin-left: -150px;
+    /*border: 1px #111111 solid;*/
+}
+
+.submit-frame {
+    margin: 20px 0px;
+
+}
+
+.submit-frame input {
+    width: 250px;
+    height: 80px;
+    font-size: 40px;
+
+}
+
+.login-frame p {
+    margin: 20px 0px;
+    font-size: 12px;
+}
+
+
